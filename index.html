@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>bypass youtube comment filter</h1>
+
+  <textarea id="textInput" placeholder="Enter text here"></textarea>
+  <button onclick="modifyText()">Bypass</button>
+  <button onclick="copyText()">Copy</button>
+
+  <textarea id="modifiedText" readonly></textarea>
+
+  <script>
+    function modifyText() {
+      let text = document.getElementById("textInput").value;
+      let modifiedText = text
+        .split("\n")
+        .map(line => {
+          line = line.split("").reverse().join("");
+          line = "\u202E" + line;
+          line = line.split("").join("\u202E"); 
+          return line;
+        })
+        .join("\n");
+      document.getElementById("modifiedText").value = modifiedText;
+    }
+
+    function copyText() {
+      let copyText = document.getElementById("modifiedText");
+      copyText.select();
+      document.execCommand("copy");
+      alert("Text copied!");
+    }
+  </script>
+
+</body>
+</html>
